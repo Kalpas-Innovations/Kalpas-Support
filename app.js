@@ -28,6 +28,30 @@ client.once('ready', () => {
 
 client.login(process.env.DISCORD_BOT)
 
+const database = new MongoClient(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+database.connect(err => {
+    console.log(`${!!err ? 'Database Connection Failed' : 'Database Connection Successful'}`);
+    let db = database.db("KalpasBot");
+    const adminsCollection = db.collection("admins");
+
+    app.get("/admins", (req, res) => {
+        let body = req.body;
+        adminsCollection.find({})
+            .toArray((err, data) => {
+                console.log('Eita ami', data)
+                res.send(data)
+            })
+    })
+
+    app.post("/addAdmin", (req, res) => {
+        let body = req.body;
+        adminsCollection.insertOne(body)
+            .then(result => {
+                console.log(typeof(result.insertedId) == "object");
+                res.send(JSON.stringify(result))
+            })
+    })
+});
 
 app.listen(PORT, () => {
     console.log(`App Listening at http://localhost:${PORT}`)
