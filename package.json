@@ -1,0 +1,36 @@
+{
+  "name": "kalpas-support",
+  "version": "0.0.1",
+  "description": "This is a automated bot for kalpas ltd.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prosany/Kalpas-Support.git"
+  },
+  "keywords": [
+    "Discord",
+    "Bot",
+    "Kalpas",
+    "Automation"
+  ],
+  "author": "Mahabub Hasan Sany",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prosany/Kalpas-Support/issues"
+  },
+  "homepage": "https://github.com/prosany/Kalpas-Support#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "discord-buttons": "3.1.1",
+    "discord.js": "12.5.3",
+    "express": "^4.17.2",
+    "mongodb": "^4.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
