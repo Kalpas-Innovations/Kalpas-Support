@@ -1,5 +1,7 @@
 const express = require("express");
 const cors = require("cors");
+const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID;
 const app = express();
 const PORT = process.env.PORT || 9090;
 const path = require("path");
@@ -18,6 +20,13 @@ app.use(express.json());
 app.get('/', async (req, res) => {
     res.sendFile(path.resolve(path.join(__dirname, "./dist/index.html")));
 });
+
+client.once('ready', () => {
+    console.log(`Logged in as ${client.user.tag}!`);
+});
+
+client.login("OTMwNDIyNDI1MTY0ODY1NTY3.Yd1paA.2ZNjdSBHVU3At945w1xArQsuVII")
+
 
 app.listen(PORT, () => {
     console.log(`App Listening at http://localhost:${PORT}`)

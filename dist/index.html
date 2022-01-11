@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./favicon.ico">
+    <link rel="shortcut icon" href="https://kalpas.in/images/favicon-pen.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
@@ -25,16 +25,59 @@
             justify-content: center;
             align-items: center;
         }
-        h1, h5 {
+
+        h2,
+        h4 {
             font-family: 'Ubuntu', sans-serif;
+        }
+
+        h2 {
+            color: #119f49;
+        }
+
+        h4 {
+            color: #2b2b2b;
+            margin-top: 5px;
+        }
+
+        .logo img {
+            width: 150px;
+            height: auto;
+        }
+
+        span:after {
+            content: ' .';
+            animation: LoadingTip 2.5s infinite;
+        }
+
+        @keyframes LoadingTip {
+            0% {
+                content: "";
+            }
+
+            30% {
+                content: ".";
+            }
+
+            60% {
+                content: "..";
+            }
+
+            100% {
+                content: "...";
+            }
         }
 
     </style>
 </head>
 <body>
     <div class="main-content">
-        <h1>Kalpas Automated Bot Is Running...</h1>
-        <h5>BUID: KSJDSA-NDBBDB-223DD-3233N4-FDKDF</h5>
+        <div class="logo">
+            <img src="https://raw.githubusercontent.com/prosany/Kalpas-Support/main/dist/image/Logo.png" alt="Logo"
+                draggable="false" />
+        </div>
+        <h2>Kalpas Automated Bot Is Running<span></span></h2>
+        <h4>BUID: 6HF37Y-3DFD43-4DV3B6-3233N4-N7S1C4</h4>
     </div>
 </body>
 </html>
