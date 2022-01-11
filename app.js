@@ -9,6 +9,7 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const discordButton = require('discord-buttons');
 discordButton(client);
+require("dotenv").config();
 
 // Custom
 const { makeUID } = require("./helpers/uniqueId");
@@ -25,7 +26,7 @@ client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.login("OTMwNDIyNDI1MTY0ODY1NTY3.Yd1paA.2ZNjdSBHVU3At945w1xArQsuVII")
+client.login(process.env.DISCORD_BOT)
 
 
 app.listen(PORT, () => {
