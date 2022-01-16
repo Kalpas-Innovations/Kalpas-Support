@@ -339,14 +339,12 @@ database.connect(err => {
                                             } else {
                                                 btn.channel.bulkDelete(filter)
                                             }
-                                            btn.defer();
                                         } else {
                                             if (btn.message.channel.type === "dm") {
                                                 btn.message.delete(filter)
                                             } else {
                                                 btn.channel.bulkDelete(filter)
                                             }
-                                            btn.defer();
                                         }
                                     })
                                 } else {
@@ -361,7 +359,6 @@ database.connect(err => {
                     }
                 })
         }
-
         btn.defer();
     })
 
