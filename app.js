@@ -138,9 +138,9 @@ database.connect(err => {
             let buttonIdTwo = "NO_" + patternOne(20);
             console.log("requestId", requestId, "buttonIdOne", buttonIdOne, "buttonIdTwo", buttonIdTwo)
 
-            let collectedData = `ID: ${requestId}\nName: ${capText(msg.author.username)}\nProjects: Simulice, Focus-On.\nMobile Number: ${"||" + "+880 1629315022" + "||"}\nType: ${capText(split[2])} Leave\n${monthCountOne === monthCountTwo && !!returnDate() ? ("Number of Days: " + returnDate() + " days\n") : ""}Date: ${split[3].includes("@") ? date : split[3]}\nNote: ${split[4] ? capText(split[4]) : "No Special Note."}\n\n<@${msg.author.id}> Is this correct?`;
+            let collectedData = `ID: ${requestId}\nName: ${capText(msg.author.username)}\nProjects: Simulice, Focus-On.\nMobile Number: ${"||" + "+123456789" + "||"}\nType: ${capText(split[2])} Leave\n${monthCountOne === monthCountTwo && !!returnDate() ? ("Number of Days: " + returnDate() + " days\n") : ""}Date: ${split[3].includes("@") ? date : split[3]}\nNote: ${split[4] ? capText(split[4]) : "No Special Note."}\n\n<@${msg.author.id}> Is this correct?`;
 
-            let adminChannelData = `ID: ${requestId}\nName: <@${msg.author.id}>\nProjects: Simulice, Focus-On.\nMobile Number: ${"||" + "+880 1629315022" + "||"}\nType: ${capText(split[2])} Leave\n${monthCountOne === monthCountTwo && !!returnDate() ? ("Number of Days: " + returnDate() + " days\n") : ""}Date: ${split[3].includes("@") ? date : split[3]}\nNote: ${split[4] ? capText(split[4]) : "No Special Note."}`;
+            let adminChannelData = `ID: ${requestId}\nName: <@${msg.author.id}>\nProjects: Simulice, Focus-On.\nMobile Number: ${"||" + "+123456789" + "||"}\nType: ${capText(split[2])} Leave\n${monthCountOne === monthCountTwo && !!returnDate() ? ("Number of Days: " + returnDate() + " days\n") : ""}Date: ${split[3].includes("@") ? date : split[3]}\nNote: ${split[4] ? capText(split[4]) : "No Special Note."}`;
 
             leavesBasket.insertOne({
                 userId: msg.author.id,
