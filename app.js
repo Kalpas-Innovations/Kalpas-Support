@@ -47,7 +47,6 @@ database.connect(err => {
         let body = req.body;
         adminsCollection.find({})
             .toArray((err, data) => {
-                console.log('Eita ami', data)
                 res.send(data)
             })
     });
@@ -56,7 +55,7 @@ database.connect(err => {
         let body = req.body;
         adminsCollection.insertOne(body)
             .then(result => {
-                console.log(typeof (result.insertedId) == "object");
+                // console.log(typeof (result.insertedId) == "object");
                 res.send(JSON.stringify(result))
             })
     });
@@ -77,7 +76,7 @@ database.connect(err => {
     var session = [];
 
     client.on("message", async msg => {
-        console.log(msg);
+        // console.log(msg);
         let mes = await msg.channel.messages.fetch()
 
         if (msg.content.toLowerCase().startsWith("#leave")) {
@@ -174,7 +173,7 @@ database.connect(err => {
                     current_project: split[5],
                     position: split[6]
                 }
-                console.log(parsedData);
+                // console.log(parsedData);
             } else {
                 msg.channel.send("You've missed some fields, please fill them correctly & use the proper format.\nFor help: #help")
             }
@@ -188,10 +187,10 @@ database.connect(err => {
         let mes = await btn.channel.messages.fetch();
         let filter = await mes.filter(prev => prev.content === btn.message.content)
         let clickers = await btn.clicker.fetch()
-        console.log("SANYSSS", btn);
+        // console.log("SANYSSS", btn);
 
         if (btn.id.startsWith("ADMIN_")) {
-            console.log(btn.id)
+            // console.log(btn.id)
             leavesCollection.find().sort({ $natural: -1 })
                 .toArray((err, data) => {
                     if (data.length > 0) {
@@ -357,7 +356,7 @@ database.connect(err => {
                             }
                         }
                     } else {
-                        console.log("From 2", err);
+                        // console.log("From 2", err);
                         btn.channel.send(`Oops! No record found for ${"ID: " + btn.message.content.slice(4, 16)}  :cold_sweat:`);
                     }
                 })
