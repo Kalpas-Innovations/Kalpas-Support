@@ -77,44 +77,8 @@ database.connect(err => {
     var session = [];
 
     client.on("message", async msg => {
+        console.log(msg);
         let mes = await msg.channel.messages.fetch()
-        // console.log(mes);
-        // Default Messages
-        let noSession = `Session is not yet created. Please create your session by sending ${"`" + "!leave" + "`"}`;
-        let formatError = "Message format is not correct, please check previous message and read carefully."
-
-        let askLeaveType = "Hello,\nSure, I'm here to help you on that, Can you please tell me what is the reason for this leave?\n\n**Note:** Please follow this format to send leave type: !general/*!sick*";
-        let ifSick = `I feel bad you are sick :cry:, please take care of your self.\nCan you please tell me, for which date you want this leave?\n\n**Note:** Please follow this format to send the date: ${"`" + "!YYYY/MM/DD" + "`"} ${formattedDate()}`;
-
-        // Action Based On Response
-        // if (msg.content.toLowerCase() === "!leave") {
-        //     if (session.length > 0) {
-        //         session.forEach(data => {
-        //             if (data.id !== msg.author.id) {
-        //                 let info = [...session, msg.author]
-        //                 session = info;
-        //             }
-        //         });
-        //     } else {
-        //         let info = [...session, msg.author]
-        //         session = info;
-        //     }
-        //     msg.reply(askLeaveType)
-        // } else if (msg.content.toLowerCase() === "!sick") {
-        //     if (session.length > 0) {
-        //         session.find(data => {
-        //             if (data.id === msg.author.id) {
-        //                 msg.reply(ifSick)
-        //             } else {
-        //                 msg.reply(noSession)
-        //             }
-        //         })
-        //     } else {
-        //         msg.reply(noSession)
-        //     }
-        // } else if (msg.content.toLowerCase() === "!general/*!sick*") {
-        //     msg.reply(formatError)
-        // }
 
         if (msg.content.toLowerCase().startsWith("#leave")) {
             let split = msg.content.split("#");
@@ -151,30 +115,55 @@ database.connect(err => {
                 userMessage: collectedData,
                 adminMessage: adminChannelData
             })
-
-            msg.channel.send(collectedData, {
-                components: [
-                    {
-                        type: 1,
-                        components: [
-                            {
-                                type: 2,
-                                style: 3,
-                                label: "Correct",
-                                custom_id: buttonIdOne,
-                                disabled: false
-                            },
-                            {
-                                type: 2,
-                                style: 4,
-                                label: "Cancel",
-                                custom_id: buttonIdTwo,
-                                disabled: false
-                            }
-                        ]
-                    }
-                ]
-            });
+            if (msg.channel.type === "dm") {
+                msg.reply(collectedData, {
+                    components: [
+                        {
+                            type: 1,
+                            components: [
+                                {
+                                    type: 2,
+                                    style: 3,
+                                    label: "Correct",
+                                    custom_id: buttonIdOne,
+                                    disabled: false
+                                },
+                                {
+                                    type: 2,
+                                    style: 4,
+                                    label: "Cancel",
+                                    custom_id: buttonIdTwo,
+                                    disabled: false
+                                }
+                            ]
+                        }
+                    ]
+                });
+            } else {
+                msg.channel.send(collectedData, {
+                    components: [
+                        {
+                            type: 1,
+                            components: [
+                                {
+                                    type: 2,
+                                    style: 3,
+                                    label: "Correct",
+                                    custom_id: buttonIdOne,
+                                    disabled: false
+                                },
+                                {
+                                    type: 2,
+                                    style: 4,
+                                    label: "Cancel",
+                                    custom_id: buttonIdTwo,
+                                    disabled: false
+                                }
+                            ]
+                        }
+                    ]
+                });
+            }
         } else if (msg.content.toLowerCase().startsWith("#addme")) {
             let split = msg.content.split("#");
             if (split.length === 7) {
@@ -346,9 +335,19 @@ database.connect(err => {
                                 } else if (btn.id.startsWith("NO_") && btn.clicker.user.id === element.userId) {
                                     leavesBasket.deleteOne({ _id: ObjectID(element._id) }).then(data => {
                                         if (data.deletedCount > 0) {
-                                            btn.channel.bulkDelete(filter)
+                                            if (btn.message.channel.type === "dm") {
+                                                btn.message.delete(filter)
+                                            } else {
+                                                btn.channel.bulkDelete(filter)
+                                            }
+                                            btn.defer();
                                         } else {
-                                            btn.channel.bulkDelete(filter)
+                                            if (btn.message.channel.type === "dm") {
+                                                btn.message.delete(filter)
+                                            } else {
+                                                btn.channel.bulkDelete(filter)
+                                            }
+                                            btn.defer();
                                         }
                                     })
                                 } else {
